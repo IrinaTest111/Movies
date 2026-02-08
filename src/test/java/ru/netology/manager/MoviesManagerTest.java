@@ -53,4 +53,48 @@ public class MoviesManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void testWhenThereFewerFilmsThanLimit() {
+        MoviesManager manager = new MoviesManager();
+
+        manager.add("Film I");
+        manager.add("Film II");
+        manager.add("Film III");
+
+        String[] actual = manager.findLast();
+        String[] expected = {"Film III", "Film II", "Film I"};
+
+        Assertions.assertArrayEquals(expected, actual);
+        Assertions.assertEquals(3, actual.length);
+    }
+
+    @Test
+    public void testWhenFilmsEqualToLimit() {
+        MoviesManager manager = new MoviesManager();
+
+        manager.add("Film I");
+        manager.add("Film II");
+        manager.add("Film III");
+        manager.add("Film IV");
+        manager.add("Film V");
+
+        String[] actual = manager.findLast();
+        String[] expected = {"Film V", "Film IV", "Film III", "Film II", "Film I"};
+
+        Assertions.assertArrayEquals(expected, actual);
+        Assertions.assertEquals(5, actual.length);
+    }
+
+
+    @Test
+    public void testEmptyMoviesList() {
+        MoviesManager manager = new MoviesManager();
+
+        String[] actual = manager.findLast();
+        String[] expected = {};
+
+        Assertions.assertArrayEquals(expected, actual);
+        Assertions.assertEquals(0, actual.length);
+    }
+
 }
